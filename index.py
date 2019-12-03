@@ -3,8 +3,11 @@ import datetime
 
 
 def handler(event, context):
+    name = "Default"
+    if event is not None and event["pathParameters"] is not None:
+        name = event["pathParameters"]["name"]
     data = {
-        'output': 'Hello ' + event["pathParameters"]["name"],
+        'output': 'Hello ' + name,
         'timestamp': datetime.datetime.utcnow().isoformat()
     }
     return {'statusCode': 200,
